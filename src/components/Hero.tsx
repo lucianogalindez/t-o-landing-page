@@ -39,9 +39,9 @@ export const Hero = () => {
             </Button>
             <Button 
               size="lg" 
-              variant="outline"
+              variant="hero"
               onClick={scrollToContact}
-              className="text-lg font-semibold border-2 border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary"
+              className="text-lg font-semibold"
             >
               <FileText className="mr-2 h-5 w-5" />
               Request a Free Quote
