@@ -14,7 +14,7 @@ export const Hero = () => {
 
   return (
     <section 
-      className="relative min-h-[600px] md:min-h-[700px] flex items-center justify-center bg-cover bg-center"
+      className="relative min-h-[600px] md:min-h-[700px] flex items-center justify-center bg-cover bg-center pt-16 md:pt-20"
       style={{ backgroundImage: `url(${heroImage})` }}
     >
       <div className="absolute inset-0 bg-gradient-to-r from-primary/95 to-primary/80" />

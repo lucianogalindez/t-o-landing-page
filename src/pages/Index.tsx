@@ -1,3 +1,4 @@
+import { Navbar } from "@/components/Navbar";
 import { Hero } from "@/components/Hero";
 import { WhyChooseUs } from "@/components/WhyChooseUs";
 import { Services } from "@/components/Services";
@@ -11,12 +12,21 @@ import { Footer } from "@/components/Footer";
 const Index = () => {
   return (
     <div className="min-h-screen">
-      <Hero />
+      <Navbar />
+      <div id="home">
+        <Hero />
+      </div>
       <WhyChooseUs />
-      <Services />
+      <div id="services">
+        <Services />
+      </div>
       <About />
-      <Gallery />
-      <Testimonials />
+      <div id="gallery">
+        <Gallery />
+      </div>
+      <div id="testimonials">
+        <Testimonials />
+      </div>
       <ServiceAreas />
       <ContactForm />
       <Footer />
