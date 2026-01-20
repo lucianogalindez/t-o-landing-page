@@ -62,13 +62,17 @@ export const Navbar = () => {
           {/* Logo */}
           <button
             onClick={() => scrollToSection("#home")}
-            className="flex items-center"
+            className="flex items-center gap-3"
           >
             <img
               src={logo}
               alt="T&O Construction LLC"
               className="h-10 md:h-12 w-auto"
             />
+            <div className="hidden sm:flex flex-col leading-tight">
+              <span className="font-bold text-foreground text-sm md:text-base">T&O Construction LLC</span>
+              <span className="text-xs md:text-sm text-accent font-medium">Building & Remodeling</span>
+            </div>
           </button>
 
           {/* Desktop Navigation */}
