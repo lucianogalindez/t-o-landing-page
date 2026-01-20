@@ -21,6 +21,9 @@ export const Hero = () => {
       
       <div className="container mx-auto px-4 py-20 md:py-32 relative z-10">
         <div className="max-w-3xl">
+          <p className="text-lg md:text-xl font-semibold text-accent mb-4 tracking-wide">
+            Building & Remodeling
+          </p>
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-primary-foreground mb-6">
             Expert Home Remodeling in RI & MA
           </h1>

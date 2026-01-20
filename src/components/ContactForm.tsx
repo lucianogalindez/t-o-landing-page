@@ -5,10 +5,24 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Calendar } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { CalendarIcon } from "lucide-react";
 import { format } from "date-fns";
 import { cn } from "@/lib/utils";
 import { useToast } from "@/hooks/use-toast";
+
+const workTypes = [
+  "Foundation Insulation + Backfill",
+  "Concrete Slab (Basement/Garage)",
+  "Framing (Walls/Floors/Roof) – New Build",
+  "Foundation",
+  "Excavation + Footings (New Build)",
+  "Window Installation & Replacement",
+  "Door Installation",
+  "Kitchen Renovation",
+  "Full Home Remodeling",
+  "Other / Not Sure",
+];
 
 export const ContactForm = () => {
   const { toast } = useToast();
@@ -154,14 +168,22 @@ ${formData.description}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="space-y-2">
                 <Label htmlFor="typeOfWork">Type of Work *</Label>
-                <Input
-                  id="typeOfWork"
-                  name="typeOfWork"
-                  required
+                <Select
                   value={formData.typeOfWork}
-                  onChange={handleChange}
-                  placeholder="e.g., Window Installation"
-                />
+                  onValueChange={(value) => setFormData({ ...formData, typeOfWork: value })}
+                  required
+                >
+                  <SelectTrigger className="w-full">
+                    <SelectValue placeholder="Select type of work" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {workTypes.map((type) => (
+                      <SelectItem key={type} value={type}>
+                        {type}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
               </div>
 
               <div className="space-y-2">
