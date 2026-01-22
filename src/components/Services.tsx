@@ -83,27 +83,19 @@ export const Services = () => {
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {structuralServices.map((service) => (
-              <Card key={service.title} className="border border-border shadow-md hover:shadow-xl transition-all duration-300 group flex flex-col">
-                <CardContent className="p-6 flex flex-col flex-grow">
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="p-2 bg-accent/10 rounded-lg">
-                      <service.icon className="h-6 w-6 text-accent" />
-                    </div>
-                    <h4 className="text-lg font-semibold text-foreground">
-                      {service.title}
-                    </h4>
+              <Card key={service.title} className="border border-border shadow-sm hover:shadow-lg transition-all duration-300 group">
+                <CardContent className="p-5 flex flex-col items-center text-center gap-4">
+                  <div className="p-3 bg-accent/10 rounded-full">
+                    <service.icon className="h-6 w-6 text-accent" />
                   </div>
-                  <p className="text-muted-foreground mb-3 flex-grow">
-                    {service.description}
-                  </p>
-                  <p className="text-sm font-medium text-accent mb-4">
-                    Pricing: {service.pricing}
-                  </p>
+                  <h4 className="text-base font-semibold text-foreground">
+                    {service.title}
+                  </h4>
                   <Button 
                     variant="outline" 
                     size="sm" 
                     onClick={scrollToContact}
-                    className="w-full mt-auto"
+                    className="w-full"
                   >
                     Request a Quote
                   </Button>
@@ -120,24 +112,19 @@ export const Services = () => {
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {remodelingServices.map((service) => (
-              <Card key={service.title} className="border border-border shadow-md hover:shadow-xl transition-all duration-300 group flex flex-col">
-                <CardContent className="p-6 flex flex-col flex-grow">
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="p-2 bg-accent/10 rounded-lg">
-                      <service.icon className="h-6 w-6 text-accent" />
-                    </div>
-                    <h4 className="text-lg font-semibold text-foreground">
-                      {service.title}
-                    </h4>
+              <Card key={service.title} className="border border-border shadow-sm hover:shadow-lg transition-all duration-300 group">
+                <CardContent className="p-5 flex flex-col items-center text-center gap-4">
+                  <div className="p-3 bg-accent/10 rounded-full">
+                    <service.icon className="h-6 w-6 text-accent" />
                   </div>
-                  <p className="text-muted-foreground mb-4 flex-grow">
-                    {service.description}
-                  </p>
+                  <h4 className="text-base font-semibold text-foreground">
+                    {service.title}
+                  </h4>
                   <Button 
                     variant="outline" 
                     size="sm" 
                     onClick={scrollToContact}
-                    className="w-full mt-auto"
+                    className="w-full"
                   >
                     Request a Quote
                   </Button>
