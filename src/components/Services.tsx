@@ -1,60 +1,65 @@
-import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Building2, Home, Hammer, Layers, Shovel, Square, DoorOpen, UtensilsCrossed } from "lucide-react";
+
+// Import service background images
+import foundationInsulationImg from "@/assets/service-foundation-insulation.jpg";
+import concreteSlabImg from "@/assets/service-concrete-slab.jpg";
+import framingImg from "@/assets/service-framing.jpg";
+import foundationImg from "@/assets/service-foundation.jpg";
+import excavationImg from "@/assets/service-excavation.jpg";
+import windowsImg from "@/assets/service-windows.jpg";
+import doorsImg from "@/assets/service-doors.jpg";
+import kitchenImg from "@/assets/service-kitchen.jpg";
+import remodelingImg from "@/assets/service-remodeling.jpg";
 
 const structuralServices = [
   {
     title: "Foundation Insulation + Backfill",
-    description: "Includes exterior foam board insulation + prep for drainage/backfill. Protects foundation & improves performance.",
-    pricing: "Estimate after site review",
     icon: Layers,
+    image: foundationInsulationImg,
   },
   {
     title: "Concrete Slab (Basement/Garage)",
-    description: "Includes gravel base, vapor barrier, reinforcement (mesh/rebar) + pour & finish. Pricing varies by thickness/size & site conditions.",
-    pricing: "Estimate after walkthrough",
     icon: Square,
+    image: concreteSlabImg,
   },
   {
     title: "Framing (Walls/Floors/Roof) – New Build",
-    description: "Includes wall/floor framing, beams/LVL (as needed), blocking & layout per plans. Not included: engineering/permit fees (if required).",
-    pricing: "Estimate after walkthrough",
     icon: Hammer,
+    image: framingImg,
   },
   {
     title: "Foundation",
-    description: "Foundation walls (forms/rebar/pour) + waterproofing options. Built to code and ready for framing.",
-    pricing: "Estimate after site review",
     icon: Building2,
+    image: foundationImg,
   },
   {
     title: "Excavation + Footings (New Build)",
-    description: "Includes excavation/layout, forms, rebar (as needed), concrete pour & finish. Not included: permits/engineering, inspections, unforeseen rock removal (if applicable).",
-    pricing: "Varies by plan & site conditions",
     icon: Shovel,
+    image: excavationImg,
   },
 ];
 
 const remodelingServices = [
   {
     title: "Window Installation & Replacement",
-    description: "Energy-efficient windows professionally installed to enhance your home's comfort and value.",
     icon: Square,
+    image: windowsImg,
   },
   {
     title: "Door Installation",
-    description: "Beautiful, secure doors that make a lasting first impression and improve home security.",
     icon: DoorOpen,
+    image: doorsImg,
   },
   {
     title: "Kitchen Renovation",
-    description: "Transform your kitchen into a beautiful, functional space perfect for cooking and entertaining.",
     icon: UtensilsCrossed,
+    image: kitchenImg,
   },
   {
     title: "Full Home Remodeling",
-    description: "Complete home transformations from concept to completion with attention to every detail.",
     icon: Home,
+    image: remodelingImg,
   },
 ];
 
@@ -62,6 +67,41 @@ const scrollToContact = () => {
   const contactSection = document.getElementById("contact");
   contactSection?.scrollIntoView({ behavior: "smooth" });
 };
+
+interface ServiceCardProps {
+  title: string;
+  icon: React.ElementType;
+  image: string;
+}
+
+const ServiceCard = ({ title, icon: Icon, image }: ServiceCardProps) => (
+  <div className="relative overflow-hidden rounded-lg shadow-sm hover:shadow-lg transition-all duration-300 group h-52">
+    {/* Background Image */}
+    <div 
+      className="absolute inset-0 bg-cover bg-center transition-transform duration-300 group-hover:scale-105"
+      style={{ backgroundImage: `url(${image})` }}
+    />
+    {/* Dark Blue Overlay */}
+    <div className="absolute inset-0 bg-primary/70 group-hover:bg-primary/65 transition-colors duration-300" />
+    {/* Content */}
+    <div className="relative z-10 h-full flex flex-col items-center justify-center text-center p-5 gap-3">
+      <div className="p-3 bg-white/10 rounded-full backdrop-blur-sm">
+        <Icon className="h-6 w-6 text-white" />
+      </div>
+      <h4 className="text-base font-semibold text-white">
+        {title}
+      </h4>
+      <Button 
+        variant="outline" 
+        size="sm" 
+        onClick={scrollToContact}
+        className="bg-white/10 border-white/30 text-white hover:bg-white hover:text-primary backdrop-blur-sm"
+      >
+        Request a Quote
+      </Button>
+    </div>
+  </div>
+);
 
 export const Services = () => {
   return (
@@ -83,24 +123,7 @@ export const Services = () => {
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {structuralServices.map((service) => (
-              <Card key={service.title} className="border border-border shadow-sm hover:shadow-lg transition-all duration-300 group">
-                <CardContent className="p-5 flex flex-col items-center text-center gap-4">
-                  <div className="p-3 bg-accent/10 rounded-full">
-                    <service.icon className="h-6 w-6 text-accent" />
-                  </div>
-                  <h4 className="text-base font-semibold text-foreground">
-                    {service.title}
-                  </h4>
-                  <Button 
-                    variant="outline" 
-                    size="sm" 
-                    onClick={scrollToContact}
-                    className="w-full"
-                  >
-                    Request a Quote
-                  </Button>
-                </CardContent>
-              </Card>
+              <ServiceCard key={service.title} {...service} />
             ))}
           </div>
         </div>
@@ -112,24 +135,7 @@ export const Services = () => {
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {remodelingServices.map((service) => (
-              <Card key={service.title} className="border border-border shadow-sm hover:shadow-lg transition-all duration-300 group">
-                <CardContent className="p-5 flex flex-col items-center text-center gap-4">
-                  <div className="p-3 bg-accent/10 rounded-full">
-                    <service.icon className="h-6 w-6 text-accent" />
-                  </div>
-                  <h4 className="text-base font-semibold text-foreground">
-                    {service.title}
-                  </h4>
-                  <Button 
-                    variant="outline" 
-                    size="sm" 
-                    onClick={scrollToContact}
-                    className="w-full"
-                  >
-                    Request a Quote
-                  </Button>
-                </CardContent>
-              </Card>
+              <ServiceCard key={service.title} {...service} />
             ))}
           </div>
         </div>
