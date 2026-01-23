@@ -25,10 +25,10 @@ export const Hero = () => {
             Building & Remodeling
           </p>
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-primary-foreground mb-6">
-            Expert Home Remodeling in RI & MA
+            Expert Building & Remodeling in RI & MA
           </h1>
           <p className="text-lg md:text-xl text-primary-foreground/90 mb-8 max-w-2xl">
-            Windows, doors, and full home renovation with clean, quality workmanship.
+            Clean, high-quality work for residential construction and home improvement projects.
           </p>
           <div className="flex flex-col sm:flex-row gap-4">
             <Button 
