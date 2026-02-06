@@ -1,17 +1,7 @@
-import gallery1 from "@/assets/gallery-1.jpg";
-import gallery2 from "@/assets/gallery-2.jpg";
-import gallery3 from "@/assets/gallery-3.jpg";
-import gallery4 from "@/assets/gallery-4.jpg";
-import gallery5 from "@/assets/gallery-5.jpg";
-import gallery6 from "@/assets/gallery-6.jpg";
+import galleryReal1 from "@/assets/gallery-real-1.png";
 
 const galleryImages = [
-  { src: gallery1, alt: "Living room renovation" },
-  { src: gallery2, alt: "Kitchen remodeling" },
-  { src: gallery3, alt: "Bathroom renovation" },
-  { src: gallery4, alt: "Window installation" },
-  { src: gallery5, alt: "Deck construction" },
-  { src: gallery6, alt: "Entryway renovation" },
+  { src: galleryReal1, alt: "Roof framing construction" },
 ];
 
 export const Gallery = () => {
