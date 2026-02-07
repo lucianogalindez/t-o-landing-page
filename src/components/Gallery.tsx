@@ -1,8 +1,10 @@
 import galleryReal1 from "@/assets/gallery-real-1.png";
 import galleryReal2 from "@/assets/gallery-real-2.png";
+import galleryReal3 from "@/assets/gallery-real-3.png";
 
 const galleryImages = [
   { src: galleryReal1, alt: "Roof framing construction" },
+  { src: galleryReal3, alt: "Sliding glass door installation" },
   { src: galleryReal2, alt: "Sliding glass door installation" },
 ];
 
