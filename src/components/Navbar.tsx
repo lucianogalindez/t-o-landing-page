@@ -71,7 +71,7 @@ export const Navbar = () => {
             />
             <div className="hidden sm:flex flex-col leading-tight">
               <span className="font-bold text-foreground text-sm md:text-base">T&O Construction LLC</span>
-              <span className="text-xs md:text-sm text-accent font-medium">Building & Remodeling</span>
+              <span className="text-xs md:text-sm text-accent font-medium">Building & Home Remodeling</span>
             </div>
           </button>
 

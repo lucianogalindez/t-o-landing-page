@@ -14,7 +14,7 @@ export const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div>
             <h3 className="text-2xl font-bold mb-1">T&O Construction LLC</h3>
-            <p className="text-accent font-medium mb-4">Building & Remodeling</p>
+            <p className="text-accent font-medium mb-4">Building & Home Remodeling</p>
             <p className="text-primary-foreground/80">
               Professional home remodeling and construction services in Rhode Island and Massachusetts.
             </p>
