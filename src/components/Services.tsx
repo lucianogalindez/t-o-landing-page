@@ -174,14 +174,14 @@ export const Services = () => {
               <Button
                 key={option}
                 variant="outline"
-                className="justify-between text-left h-auto py-3 px-4"
+                className="flex flex-col items-start text-left h-auto py-3 px-4 gap-1 sm:flex-row sm:items-center sm:justify-between"
                 onClick={() => {
                   setFoundationOpen(false);
                   scrollToContact(option);
                 }}
               >
-                <span>{option}</span>
-                <span className="text-xs text-muted-foreground ml-2 shrink-0">Request a Quote →</span>
+                <span className="break-words">{option}</span>
+                <span className="text-xs text-muted-foreground sm:ml-2 shrink-0">Request a Quote →</span>
               </Button>
             ))}
           </div>
