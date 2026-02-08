@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -36,6 +36,14 @@ export const ContactForm = () => {
     description: "",
     budget: "",
   });
+
+  useEffect(() => {
+    const handlePreselect = (e: CustomEvent<string>) => {
+      setFormData((prev) => ({ ...prev, typeOfWork: e.detail }));
+    };
+    window.addEventListener("preselect-work-type", handlePreselect as EventListener);
+    return () => window.removeEventListener("preselect-work-type", handlePreselect as EventListener);
+  }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();

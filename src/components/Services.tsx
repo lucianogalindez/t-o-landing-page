@@ -1,42 +1,39 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Building2, Home, Hammer, Layers, Shovel, Square, DoorOpen, UtensilsCrossed } from "lucide-react";
+import { Building2, Home, Hammer, Square, DoorOpen, UtensilsCrossed } from "lucide-react";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from "@/components/ui/dialog";
 
 // Import service background images
-import foundationInsulationImg from "@/assets/service-foundation-insulation.jpg";
-import concreteSlabImg from "@/assets/service-concrete-slab.jpg";
 import framingImg from "@/assets/service-framing.jpg";
 import foundationImg from "@/assets/service-foundation.jpg";
-import excavationImg from "@/assets/service-excavation.jpg";
 import windowsImg from "@/assets/service-windows.jpg";
 import doorsImg from "@/assets/service-doors.jpg";
 import kitchenImg from "@/assets/service-kitchen.jpg";
 import remodelingImg from "@/assets/service-remodeling.jpg";
 
+const foundationSubOptions = [
+  "Excavation + Footings (New Build)",
+  "Foundation Insulation + Backfill",
+  "Concrete Slab (Basement/Garage)",
+];
+
 const structuralServices = [
   {
-    title: "Foundation Insulation + Backfill",
-    icon: Layers,
-    image: foundationInsulationImg,
-  },
-  {
-    title: "Concrete Slab (Basement/Garage)",
-    icon: Square,
-    image: concreteSlabImg,
+    title: "Foundation",
+    icon: Building2,
+    image: foundationImg,
+    hasSubOptions: true,
   },
   {
     title: "Framing (Walls/Floors/Roof) – New Build",
     icon: Hammer,
     image: framingImg,
-  },
-  {
-    title: "Foundation",
-    icon: Building2,
-    image: foundationImg,
-  },
-  {
-    title: "Excavation + Footings (New Build)",
-    icon: Shovel,
-    image: excavationImg,
   },
 ];
 
@@ -63,7 +60,10 @@ const remodelingServices = [
   },
 ];
 
-const scrollToContact = () => {
+const scrollToContact = (workType?: string) => {
+  if (workType) {
+    window.dispatchEvent(new CustomEvent("preselect-work-type", { detail: workType }));
+  }
   const contactSection = document.getElementById("contact");
   contactSection?.scrollIntoView({ behavior: "smooth" });
 };
@@ -72,9 +72,11 @@ interface ServiceCardProps {
   title: string;
   icon: React.ElementType;
   image: string;
+  hasSubOptions?: boolean;
+  onViewOptions?: () => void;
 }
 
-const ServiceCard = ({ title, icon: Icon, image }: ServiceCardProps) => (
+const ServiceCard = ({ title, icon: Icon, image, hasSubOptions, onViewOptions }: ServiceCardProps) => (
   <div className="relative overflow-hidden rounded-lg shadow-sm hover:shadow-lg transition-all duration-300 group h-52">
     {/* Background Image */}
     <div 
@@ -91,19 +93,32 @@ const ServiceCard = ({ title, icon: Icon, image }: ServiceCardProps) => (
       <h4 className="text-base font-semibold text-white">
         {title}
       </h4>
-      <Button 
-        variant="outline" 
-        size="sm" 
-        onClick={scrollToContact}
-        className="bg-white/10 border-white/30 text-white hover:bg-white hover:text-primary backdrop-blur-sm"
-      >
-        Request a Quote
-      </Button>
+      {hasSubOptions ? (
+        <Button 
+          variant="outline" 
+          size="sm" 
+          onClick={onViewOptions}
+          className="bg-white/10 border-white/30 text-white hover:bg-white hover:text-primary backdrop-blur-sm"
+        >
+          View Options
+        </Button>
+      ) : (
+        <Button 
+          variant="outline" 
+          size="sm" 
+          onClick={() => scrollToContact()}
+          className="bg-white/10 border-white/30 text-white hover:bg-white hover:text-primary backdrop-blur-sm"
+        >
+          Request a Quote
+        </Button>
+      )}
     </div>
   </div>
 );
 
 export const Services = () => {
+  const [foundationOpen, setFoundationOpen] = useState(false);
+
   return (
     <section className="py-16 md:py-24 bg-background">
       <div className="container mx-auto px-4">
@@ -123,7 +138,11 @@ export const Services = () => {
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {structuralServices.map((service) => (
-              <ServiceCard key={service.title} {...service} />
+              <ServiceCard
+                key={service.title}
+                {...service}
+                onViewOptions={service.hasSubOptions ? () => setFoundationOpen(true) : undefined}
+              />
             ))}
           </div>
         </div>
@@ -140,6 +159,34 @@ export const Services = () => {
           </div>
         </div>
       </div>
+
+      {/* Foundation Sub-Options Dialog */}
+      <Dialog open={foundationOpen} onOpenChange={setFoundationOpen}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle className="text-xl font-bold">Foundation Services</DialogTitle>
+            <DialogDescription>
+              Select a foundation service to request a quote.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="flex flex-col gap-3 pt-2">
+            {foundationSubOptions.map((option) => (
+              <Button
+                key={option}
+                variant="outline"
+                className="justify-between text-left h-auto py-3 px-4"
+                onClick={() => {
+                  setFoundationOpen(false);
+                  scrollToContact(option);
+                }}
+              >
+                <span>{option}</span>
+                <span className="text-xs text-muted-foreground ml-2 shrink-0">Request a Quote →</span>
+              </Button>
+            ))}
+          </div>
+        </DialogContent>
+      </Dialog>
     </section>
   );
 };
