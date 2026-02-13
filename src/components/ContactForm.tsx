@@ -45,30 +45,61 @@ export const ContactForm = () => {
     return () => window.removeEventListener("preselect-work-type", handlePreselect as EventListener);
   }, []);
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    // Create mailto link with form data
-    const subject = encodeURIComponent("Free Quote Request - T&O Construction");
-    const body = encodeURIComponent(`
-Preferred Date: ${date ? format(date, "PPP") : "Not specified"}
-Name: ${formData.name}
-Email: ${formData.email}
-Phone: ${formData.phone}
-Address: ${formData.address}
-Type of Work: ${formData.typeOfWork}
-Budget: ${formData.budget || "Not specified"}
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-Description:
-${formData.description}
-    `);
-    
-    window.location.href = `mailto:t.oconstructionllc12@gmail.com?subject=${subject}&body=${body}`;
-    
-    toast({
-      title: "Opening email client...",
-      description: "Your default email application will open with the quote request.",
-    });
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    try {
+      const payload = {
+        preferredDate: date ? format(date, "PPP") : "Not specified",
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        address: formData.address,
+        typeOfWork: formData.typeOfWork,
+        budget: formData.budget || "Not specified",
+        description: formData.description,
+      };
+
+      const response = await fetch(
+        "https://n8n-n8n.agjjtd.easypanel.host/webhook-test/dc3edd26-165c-4578-8863-e78106fb8648",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Request failed");
+      }
+
+      toast({
+        title: "Request Sent!",
+        description: "Your quote request has been submitted successfully. We'll get back to you soon.",
+      });
+
+      setFormData({
+        name: "",
+        email: "",
+        phone: "",
+        address: "",
+        typeOfWork: "",
+        description: "",
+        budget: "",
+      });
+      setDate(undefined);
+    } catch {
+      toast({
+        title: "Error",
+        description: "Something went wrong. Please try again later.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -219,8 +250,8 @@ ${formData.description}
               />
             </div>
 
-            <Button type="submit" size="lg" className="w-full">
-              Submit Request
+            <Button type="submit" size="lg" className="w-full" disabled={isSubmitting}>
+              {isSubmitting ? "Sending..." : "Submit Request"}
             </Button>
           </form>
         </div>
