@@ -31,11 +31,11 @@ export const Footer = () => {
                 401-632-5085
               </a>
               <a 
-                href="mailto:t.oconstructionllc12@gmail.com"
+                href="mailto:info@tandoconstructionllc.com"
                 className="flex items-center gap-2 text-primary-foreground/80 hover:text-primary-foreground transition-colors"
               >
                 <Mail className="h-4 w-4" />
-                t.oconstructionllc12@gmail.com
+                info@tandoconstructionllc.com
               </a>
               <div className="flex items-center gap-2 text-primary-foreground/80">
                 <MapPin className="h-4 w-4" />
