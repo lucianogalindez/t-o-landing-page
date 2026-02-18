@@ -6,6 +6,7 @@ import galleryReal6 from "@/assets/gallery-real-6.png";
 import galleryReal7 from "@/assets/gallery-real-7.png";
 import galleryReal8 from "@/assets/gallery-real-8.png";
 import galleryReal9 from "@/assets/gallery-real-9.png";
+import galleryReal10 from "@/assets/gallery-real-10.png";
 
 const galleryImages = [
   { src: galleryReal1, alt: "Roof framing construction" },
@@ -16,6 +17,7 @@ const galleryImages = [
   { src: galleryReal7, alt: "Foundation measurement work" },
   { src: galleryReal8, alt: "Kitchen remodel with white cabinets" },
   { src: galleryReal9, alt: "Interior cabinetry and flooring" },
+  { src: galleryReal10, alt: "Bay window installation with trim" },
 ];
 
 export const Gallery = () => {
