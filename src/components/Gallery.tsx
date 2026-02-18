@@ -1,9 +1,11 @@
 import galleryReal1 from "@/assets/gallery-real-1.png";
 import galleryReal3 from "@/assets/gallery-real-3.png";
+import galleryReal4 from "@/assets/gallery-real-4.png";
 
 const galleryImages = [
   { src: galleryReal1, alt: "Roof framing construction" },
   { src: galleryReal3, alt: "Sliding glass door installation" },
+  { src: galleryReal4, alt: "Window with shutters installation" },
 ];
 
 export const Gallery = () => {
