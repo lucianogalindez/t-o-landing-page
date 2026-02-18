@@ -21,14 +21,11 @@ export const Hero = () => {
       
       <div className="container mx-auto px-4 py-20 md:py-32 relative z-10">
         <div className="max-w-3xl">
-          <p className="text-lg md:text-xl font-semibold text-accent mb-4 tracking-wide">
-            Building & Home Remodeling
-          </p>
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-primary-foreground mb-6">
-            Expert Building & Home Remodeling in RI & MA
+            Building & Home Remodeling in RI & MA
           </h1>
           <p className="text-lg md:text-xl text-primary-foreground/90 mb-8 max-w-2xl">
-            Clean, high-quality work for residential construction and home improvement projects.
+            High-quality workmanship for residential projects—clean finishes, done right.
           </p>
           <div className="flex flex-col sm:flex-row gap-4">
             <Button 
