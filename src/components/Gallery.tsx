@@ -4,6 +4,8 @@ import galleryReal4 from "@/assets/gallery-real-4.png";
 import galleryReal5 from "@/assets/gallery-real-5.png";
 import galleryReal6 from "@/assets/gallery-real-6.png";
 import galleryReal7 from "@/assets/gallery-real-7.png";
+import galleryReal8 from "@/assets/gallery-real-8.png";
+import galleryReal9 from "@/assets/gallery-real-9.png";
 
 const galleryImages = [
   { src: galleryReal1, alt: "Roof framing construction" },
@@ -12,6 +14,8 @@ const galleryImages = [
   { src: galleryReal5, alt: "Oak window trim detail" },
   { src: galleryReal6, alt: "Window installation on scaffold" },
   { src: galleryReal7, alt: "Foundation measurement work" },
+  { src: galleryReal8, alt: "Kitchen remodel with white cabinets" },
+  { src: galleryReal9, alt: "Interior cabinetry and flooring" },
 ];
 
 export const Gallery = () => {
