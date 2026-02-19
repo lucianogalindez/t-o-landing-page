@@ -12,11 +12,7 @@ import { cn } from "@/lib/utils";
 import { useToast } from "@/hooks/use-toast";
 
 const workTypes = [
-  "Foundation Insulation + Backfill",
-  "Concrete Slab (Basement/Garage)",
   "Framing (Walls/Floors/Roof) – New Build",
-  "Foundation",
-  "Excavation + Footings (New Build)",
   "Window Installation & Replacement",
   "Door Installation",
   "Kitchen Renovation",
