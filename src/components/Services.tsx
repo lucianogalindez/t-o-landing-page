@@ -1,35 +1,14 @@
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Building2, Home, Hammer, Square, DoorOpen, UtensilsCrossed } from "lucide-react";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogDescription,
-} from "@/components/ui/dialog";
+import { Home, Hammer, Square, DoorOpen, UtensilsCrossed } from "lucide-react";
 
 // Import service background images
 import framingImg from "@/assets/service-framing.jpg";
-import foundationImg from "@/assets/service-foundation.jpg";
 import windowsImg from "@/assets/service-windows.jpg";
 import doorsImg from "@/assets/service-doors.jpg";
 import kitchenImg from "@/assets/service-kitchen.jpg";
 import remodelingImg from "@/assets/service-remodeling.jpg";
 
-const foundationSubOptions = [
-  "Excavation + Footings (New Build)",
-  "Foundation Insulation + Backfill",
-  "Concrete Slab (Basement/Garage)",
-];
-
 const structuralServices = [
-  {
-    title: "Foundation",
-    icon: Building2,
-    image: foundationImg,
-    hasSubOptions: true,
-  },
   {
     title: "Framing (Walls/Floors/Roof) – New Build",
     icon: Hammer,
@@ -72,20 +51,15 @@ interface ServiceCardProps {
   title: string;
   icon: React.ElementType;
   image: string;
-  hasSubOptions?: boolean;
-  onViewOptions?: () => void;
 }
 
-const ServiceCard = ({ title, icon: Icon, image, hasSubOptions, onViewOptions }: ServiceCardProps) => (
+const ServiceCard = ({ title, icon: Icon, image }: ServiceCardProps) => (
   <div className="relative overflow-hidden rounded-lg shadow-sm hover:shadow-lg transition-all duration-300 group h-52">
-    {/* Background Image */}
     <div 
       className="absolute inset-0 bg-cover bg-center transition-transform duration-300 group-hover:scale-105"
       style={{ backgroundImage: `url(${image})` }}
     />
-    {/* Dark Blue Overlay */}
     <div className="absolute inset-0 bg-primary/70 group-hover:bg-primary/65 transition-colors duration-300" />
-    {/* Content */}
     <div className="relative z-10 h-full flex flex-col items-center justify-center text-center p-5 gap-3">
       <div className="p-3 bg-white/10 rounded-full backdrop-blur-sm">
         <Icon className="h-6 w-6 text-white" />
@@ -93,32 +67,19 @@ const ServiceCard = ({ title, icon: Icon, image, hasSubOptions, onViewOptions }:
       <h4 className="text-base font-semibold text-white">
         {title}
       </h4>
-      {hasSubOptions ? (
-        <Button 
-          variant="outline" 
-          size="sm" 
-          onClick={onViewOptions}
-          className="bg-white/10 border-white/30 text-white hover:bg-white hover:text-primary backdrop-blur-sm"
-        >
-          View Options
-        </Button>
-      ) : (
-        <Button 
-          variant="outline" 
-          size="sm" 
-          onClick={() => scrollToContact()}
-          className="bg-white/10 border-white/30 text-white hover:bg-white hover:text-primary backdrop-blur-sm"
-        >
-          Request a Quote
-        </Button>
-      )}
+      <Button 
+        variant="outline" 
+        size="sm" 
+        onClick={() => scrollToContact()}
+        className="bg-white/10 border-white/30 text-white hover:bg-white hover:text-primary backdrop-blur-sm"
+      >
+        Request a Quote
+      </Button>
     </div>
   </div>
 );
 
 export const Services = () => {
-  const [foundationOpen, setFoundationOpen] = useState(false);
-
   return (
     <section className="py-16 md:py-24 bg-background">
       <div className="container mx-auto px-4">
@@ -141,7 +102,6 @@ export const Services = () => {
               <ServiceCard
                 key={service.title}
                 {...service}
-                onViewOptions={service.hasSubOptions ? () => setFoundationOpen(true) : undefined}
               />
             ))}
           </div>
@@ -160,33 +120,6 @@ export const Services = () => {
         </div>
       </div>
 
-      {/* Foundation Sub-Options Dialog */}
-      <Dialog open={foundationOpen} onOpenChange={setFoundationOpen}>
-        <DialogContent className="sm:max-w-md">
-          <DialogHeader>
-            <DialogTitle className="text-xl font-bold">Foundation Services</DialogTitle>
-            <DialogDescription>
-              Select a foundation service to request a quote.
-            </DialogDescription>
-          </DialogHeader>
-          <div className="flex flex-col gap-3 pt-2">
-            {foundationSubOptions.map((option) => (
-              <Button
-                key={option}
-                variant="outline"
-                className="flex flex-col items-start text-left h-auto py-3 px-4 gap-1 sm:flex-row sm:items-center sm:justify-between"
-                onClick={() => {
-                  setFoundationOpen(false);
-                  scrollToContact(option);
-                }}
-              >
-                <span className="break-words">{option}</span>
-                <span className="text-xs text-muted-foreground sm:ml-2 shrink-0">Request a Quote →</span>
-              </Button>
-            ))}
-          </div>
-        </DialogContent>
-      </Dialog>
     </section>
   );
 };
