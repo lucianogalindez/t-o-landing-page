@@ -60,7 +60,7 @@ export const ContactForm = () => {
       };
 
       const response = await fetch(
-        "https://n8n-n8n.agjjtd.easypanel.host/webhook-test/dc3edd26-165c-4578-8863-e78106fb8648",
+        "https://n8n-n8n.agjjtd.easypanel.host/webhook/dc3edd26-165c-4578-8863-e78106fb8648",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
