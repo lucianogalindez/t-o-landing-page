@@ -19,7 +19,7 @@ const galleryImages = [
   { src: galleryReal5, alt: "Oak window trim detail" },
   { src: galleryReal6, alt: "Window installation on scaffold" },
   { src: galleryReal7, alt: "Foundation measurement work" },
-  { src: galleryReal8, alt: "Kitchen remodel with white cabinets" },
+  
   { src: galleryReal9, alt: "Interior cabinetry and flooring" },
   { src: galleryReal10, alt: "Bay window installation with trim" },
   { src: galleryReal11, alt: "Arched window and door installation" },
