@@ -1,4 +1,4 @@
-import { Phone, Mail, MapPin } from "lucide-react";
+import { Phone, Mail, MapPin, Instagram, Facebook } from "lucide-react";
 
 export const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -69,8 +69,28 @@ export const Footer = () => {
           </div>
         </div>
 
-        <div className="border-t border-primary-foreground/20 mt-8 pt-8 text-center text-primary-foreground/80">
+        <div className="border-t border-primary-foreground/20 mt-8 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-primary-foreground/80">
           <p>&copy; {currentYear} T&O Construction LLC. All rights reserved.</p>
+          <div className="flex items-center gap-4">
+            <a
+              href="https://www.instagram.com/t.oconstructionllc?igsh=MXkxc3B0d3Z1aXl2ZQ=="
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Instagram"
+              className="hover:text-primary-foreground transition-colors"
+            >
+              <Instagram className="h-5 w-5" />
+            </a>
+            <a
+              href="https://www.facebook.com/share/16hkJaqUaX/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Facebook"
+              className="hover:text-primary-foreground transition-colors"
+            >
+              <Facebook className="h-5 w-5" />
+            </a>
+          </div>
         </div>
       </div>
     </footer>
