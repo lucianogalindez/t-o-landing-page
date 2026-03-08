@@ -11,6 +11,9 @@ import galleryReal11 from "@/assets/gallery-real-11.jpg";
 import galleryReal12 from "@/assets/gallery-real-12.jpg";
 import galleryReal13 from "@/assets/gallery-real-13.jpg";
 import galleryReal14 from "@/assets/gallery-real-14.jpg";
+import galleryReal15 from "@/assets/gallery-real-15.jpg";
+import galleryReal16 from "@/assets/gallery-real-16.jpg";
+import galleryReal17 from "@/assets/gallery-real-17.jpg";
 
 const galleryImages = [
   { src: galleryReal1, alt: "Roof framing construction" },
