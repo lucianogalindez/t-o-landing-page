@@ -41,6 +41,24 @@ export const Footer = () => {
                 <MapPin className="h-4 w-4" />
                 Serving RI & MA
               </div>
+              <a
+                href="https://www.instagram.com/t.oconstructionllc?igsh=MXkxc3B0d3Z1aXl2ZQ=="
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 text-primary-foreground/80 hover:text-primary-foreground transition-colors"
+              >
+                <Instagram className="h-4 w-4" />
+                Instagram
+              </a>
+              <a
+                href="https://www.facebook.com/share/16hkJaqUaX/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 text-primary-foreground/80 hover:text-primary-foreground transition-colors"
+              >
+                <Facebook className="h-4 w-4" />
+                Facebook
+              </a>
             </div>
           </div>
 
