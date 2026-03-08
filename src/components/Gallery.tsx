@@ -29,6 +29,9 @@ const galleryImages = [
   { src: galleryReal12, alt: "Window installation on cedar shingle siding" },
   { src: galleryReal13, alt: "Interior framing construction" },
   { src: galleryReal14, alt: "Custom door installation with storm door" },
+  { src: galleryReal15, alt: "Blue front door installation with decorative trim" },
+  { src: galleryReal16, alt: "Arched window with wood paneling" },
+  { src: galleryReal17, alt: "Roof framing construction crew" },
 ];
 
 export const Gallery = () => {
