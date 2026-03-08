@@ -17,18 +17,18 @@ import galleryReal16 from "@/assets/gallery-real-16.jpg";
 import galleryReal17 from "@/assets/gallery-real-17.jpg";
 
 const galleryImages = [
-  { src: galleryReal1, alt: "Roof framing construction" },
+  { src: galleryReal14, alt: "Custom door installation with storm door" },
+  { src: galleryReal11, alt: "Arched window and door installation" },
   { src: galleryReal3, alt: "Sliding glass door installation" },
+  { src: galleryReal1, alt: "Roof framing construction" },
   { src: galleryReal4, alt: "Window with shutters installation" },
   { src: galleryReal5, alt: "Oak window trim detail" },
   { src: galleryReal6, alt: "Window installation on scaffold" },
   { src: galleryReal7, alt: "Foundation measurement work" },
   { src: galleryReal9, alt: "Interior cabinetry and flooring" },
   { src: galleryReal10, alt: "Bay window installation with trim" },
-  { src: galleryReal11, alt: "Arched window and door installation" },
   { src: galleryReal12, alt: "Window installation on cedar shingle siding" },
   { src: galleryReal13, alt: "Interior framing construction" },
-  { src: galleryReal14, alt: "Custom door installation with storm door" },
   { src: galleryReal15, alt: "Blue front door installation with decorative trim" },
   { src: galleryReal16, alt: "Arched window with wood paneling" },
   { src: galleryReal17, alt: "Roof framing construction crew" },
