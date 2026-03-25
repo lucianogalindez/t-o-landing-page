@@ -65,7 +65,7 @@ export const Testimonials = () => {
         );
         if (!res.ok) throw new Error("Failed");
         const data = await res.json();
-        const entry = data?.[0];
+        const entry = Array.isArray(data) ? data[0] : data;
         if (entry?.reviews?.length > 0 && entry?.summary) {
           setReviews(entry.reviews);
           setSummary(entry.summary);
