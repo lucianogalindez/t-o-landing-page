@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Star, ChevronDown, ChevronUp } from "lucide-react";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
+import { Skeleton } from "@/components/ui/skeleton";
 
 interface Review {
   authorName: string;
@@ -45,10 +46,33 @@ const fallbackSummary: ReviewSummary = {
 const INITIAL_COUNT = 3;
 const BATCH_SIZE = 3;
 
+const SkeletonCard = () => (
+  <Card className="border-none shadow-md">
+    <CardContent className="pt-6">
+      <div className="flex gap-1 mb-4">
+        {[...Array(5)].map((_, i) => (
+          <Skeleton key={i} className="w-5 h-5 rounded-sm" />
+        ))}
+      </div>
+      <Skeleton className="h-4 w-full mb-2" />
+      <Skeleton className="h-4 w-full mb-2" />
+      <Skeleton className="h-4 w-3/4 mb-4" />
+      <div className="border-t pt-4 flex items-center gap-3">
+        <Skeleton className="h-9 w-9 rounded-full" />
+        <div>
+          <Skeleton className="h-4 w-24 mb-1" />
+          <Skeleton className="h-3 w-16" />
+        </div>
+      </div>
+    </CardContent>
+  </Card>
+);
+
 export const Testimonials = () => {
-  const [reviews, setReviews] = useState<Review[]>(fallbackReviews);
-  const [summary, setSummary] = useState<ReviewSummary>(fallbackSummary);
+  const [reviews, setReviews] = useState<Review[]>([]);
+  const [summary, setSummary] = useState<ReviewSummary | null>(null);
   const [isGoogle, setIsGoogle] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [visibleCount, setVisibleCount] = useState(INITIAL_COUNT);
 
   useEffect(() => {
@@ -70,9 +94,15 @@ export const Testimonials = () => {
           setReviews(entry.reviews);
           setSummary(entry.summary);
           setIsGoogle(true);
+        } else {
+          setReviews(fallbackReviews);
+          setSummary(fallbackSummary);
         }
       } catch {
-        // fallback already set
+        setReviews(fallbackReviews);
+        setSummary(fallbackSummary);
+      } finally {
+        setIsLoading(false);
       }
     };
     fetchReviews();
@@ -97,7 +127,9 @@ export const Testimonials = () => {
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
             What Our Clients Say
           </h2>
-          {isGoogle ? (
+          {isLoading ? (
+            <Skeleton className="h-5 w-64 mx-auto" />
+          ) : isGoogle && summary ? (
             <div className="flex flex-col items-center gap-1">
               <div className="flex items-center gap-2">
                 <div className="flex gap-0.5">
@@ -128,60 +160,62 @@ export const Testimonials = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-          {visibleReviews.map((review, index) => (
-            <Card
-              key={index}
-              className="border-none shadow-md"
-              style={{
-                animation:
-                  index >= visibleCount - BATCH_SIZE
-                    ? `fade-in 0.4s ease-out ${(index % BATCH_SIZE) * 0.08}s both`
-                    : undefined,
-              }}
-            >
-              <CardContent className="pt-6">
-                <div className="flex gap-1 mb-4">
-                  {[...Array(5)].map((_, i) => (
-                    <Star
-                      key={i}
-                      className={`w-5 h-5 ${
-                        i < review.rating
-                          ? "fill-accent text-accent"
-                          : "text-muted-foreground/30"
-                      }`}
-                    />
-                  ))}
-                </div>
-                <p className="text-muted-foreground mb-4 italic">
-                  "{review.comment}"
-                </p>
-                <div className="border-t pt-4 flex items-center gap-3">
-                  {review.profilePhotoUrl && (
-                    <Avatar className="h-9 w-9">
-                      <AvatarImage src={review.profilePhotoUrl} alt={review.authorName} />
-                      <AvatarFallback className="text-xs">
-                        {review.authorName.charAt(0)}
-                      </AvatarFallback>
-                    </Avatar>
-                  )}
-                  <div>
-                    <p className="font-semibold text-foreground">{review.authorName}</p>
-                    {review.date && (
-                      <p className="text-sm text-muted-foreground">
-                        {new Date(review.date).toLocaleDateString("en-US", {
-                          month: "short",
-                          year: "numeric",
-                        })}
-                      </p>
-                    )}
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          ))}
+          {isLoading
+            ? [...Array(3)].map((_, i) => <SkeletonCard key={i} />)
+            : visibleReviews.map((review, index) => (
+                <Card
+                  key={index}
+                  className="border-none shadow-md"
+                  style={{
+                    animation:
+                      index >= visibleCount - BATCH_SIZE
+                        ? `fade-in 0.4s ease-out ${(index % BATCH_SIZE) * 0.08}s both`
+                        : undefined,
+                  }}
+                >
+                  <CardContent className="pt-6">
+                    <div className="flex gap-1 mb-4">
+                      {[...Array(5)].map((_, i) => (
+                        <Star
+                          key={i}
+                          className={`w-5 h-5 ${
+                            i < review.rating
+                              ? "fill-accent text-accent"
+                              : "text-muted-foreground/30"
+                          }`}
+                        />
+                      ))}
+                    </div>
+                    <p className="text-muted-foreground mb-4 italic">
+                      "{review.comment}"
+                    </p>
+                    <div className="border-t pt-4 flex items-center gap-3">
+                      {review.profilePhotoUrl && (
+                        <Avatar className="h-9 w-9">
+                          <AvatarImage src={review.profilePhotoUrl} alt={review.authorName} />
+                          <AvatarFallback className="text-xs">
+                            {review.authorName.charAt(0)}
+                          </AvatarFallback>
+                        </Avatar>
+                      )}
+                      <div>
+                        <p className="font-semibold text-foreground">{review.authorName}</p>
+                        {review.date && (
+                          <p className="text-sm text-muted-foreground">
+                            {new Date(review.date).toLocaleDateString("en-US", {
+                              month: "short",
+                              year: "numeric",
+                            })}
+                          </p>
+                        )}
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
         </div>
 
-        {reviews.length > INITIAL_COUNT && (
+        {!isLoading && reviews.length > INITIAL_COUNT && (
           <div className="flex justify-center mt-10">
             <button
               onClick={handleToggle}
