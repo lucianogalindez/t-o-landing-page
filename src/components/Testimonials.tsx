@@ -56,9 +56,10 @@ export const Testimonials = () => {
     const fetchReviews = async () => {
       try {
         const res = await fetch(
-          "https://n8n-n8n.agjjtd.easypanel.host/webhook/get-reviews",
+          `https://n8n-n8n.agjjtd.easypanel.host/webhook/get-reviews?t=${Date.now()}`,
           {
             headers: { "x-api-key": "tando_reviews_2026_2026" },
+            cache: "no-store",
             signal: controller.signal,
           }
         );
