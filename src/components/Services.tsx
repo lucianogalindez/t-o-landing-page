@@ -1,77 +1,94 @@
 import { Button } from "@/components/ui/button";
 import { Home, Hammer, Square, DoorOpen, UtensilsCrossed } from "lucide-react";
 
-// Import service background images
-import framingImg from "@/assets/service-framing.jpg";
-import windowsImg from "@/assets/service-windows.jpg";
-import doorsImg from "@/assets/service-doors.jpg";
-import kitchenImg from "@/assets/service-kitchen.jpg";
+import framingImg    from "@/assets/service-framing.jpg";
+import windowsImg   from "@/assets/service-windows.jpg";
+import doorsImg     from "@/assets/service-doors.jpg";
+import kitchenImg   from "@/assets/service-kitchen.jpg";
 import remodelingImg from "@/assets/service-remodeling.jpg";
 
-const structuralServices = [
+const services = [
   {
-    title: "Framing (Walls/Floors/Roof) – New Build",
+    title: "Framing",
+    subtitle: "Walls · Floors · Roof · New Build",
+    description: "Structural framing for walls, floors, and roof systems, built with precision from the foundation up on new residential construction.",
     icon: Hammer,
     image: framingImg,
+    featured: true,
   },
-];
-
-const remodelingServices = [
   {
-    title: "Window Installation & Replacement",
+    title: "Window Installation",
+    subtitle: "Installation & Replacement",
+    description: "Energy-efficient window installation and full replacement service.",
     icon: Square,
     image: windowsImg,
+    featured: false,
   },
   {
     title: "Door Installation",
+    subtitle: "Interior & Exterior",
+    description: "Entry, French, and sliding door installation, interior and exterior.",
     icon: DoorOpen,
     image: doorsImg,
+    featured: false,
   },
   {
     title: "Kitchen Renovation",
+    subtitle: "Full Remodel",
+    description: "Full kitchen remodels from layout planning through finished cabinetry and surfaces.",
     icon: UtensilsCrossed,
     image: kitchenImg,
+    featured: false,
   },
   {
-    title: "Full Home Remodeling",
+    title: "Home Remodeling",
+    subtitle: "Full Home",
+    description: "Complete interior transformations, from single rooms to whole-house renovations.",
     icon: Home,
     image: remodelingImg,
+    featured: false,
   },
 ];
 
-const scrollToContact = (workType?: string) => {
-  if (workType) {
-    window.dispatchEvent(new CustomEvent("preselect-work-type", { detail: workType }));
-  }
-  const contactSection = document.getElementById("contact");
-  contactSection?.scrollIntoView({ behavior: "smooth" });
+const scrollToContact = () => {
+  document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
 };
 
 interface ServiceCardProps {
   title: string;
+  subtitle: string;
+  description: string;
   icon: React.ElementType;
   image: string;
+  featured: boolean;
 }
 
-const ServiceCard = ({ title, icon: Icon, image }: ServiceCardProps) => (
-  <div className="relative overflow-hidden rounded-lg shadow-sm hover:shadow-lg transition-all duration-300 group h-52">
-    <div 
-      className="absolute inset-0 bg-cover bg-center transition-transform duration-300 group-hover:scale-105"
+const ServiceCard = ({ title, subtitle, description, icon: Icon, image, featured }: ServiceCardProps) => (
+  <div
+    className={`relative overflow-hidden rounded-xl group cursor-default ${
+      featured ? "h-72 md:h-80" : "h-60"
+    }`}
+  >
+    <div
+      className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
       style={{ backgroundImage: `url(${image})` }}
     />
-    <div className="absolute inset-0 bg-primary/70 group-hover:bg-primary/65 transition-colors duration-300" />
-    <div className="relative z-10 h-full flex flex-col items-center justify-center text-center p-5 gap-3">
-      <div className="p-3 bg-white/10 rounded-full backdrop-blur-sm">
-        <Icon className="h-6 w-6 text-white" />
+    <div className="absolute inset-0 bg-gradient-to-t from-primary/95 via-primary/55 to-primary/15" />
+
+    <div className="relative z-10 h-full flex flex-col justify-end p-5 md:p-6">
+      <div className="flex items-center gap-2 mb-2">
+        <Icon className="h-3.5 w-3.5 text-white/60" />
+        <span className="text-xs text-white/60 uppercase tracking-wider">{subtitle}</span>
       </div>
-      <h4 className="text-base font-semibold text-white">
+      <h4 className={`font-bold text-white mb-2 leading-tight ${featured ? "text-2xl md:text-3xl" : "text-lg"}`}>
         {title}
       </h4>
-      <Button 
-        variant="outline" 
-        size="sm" 
-        onClick={() => scrollToContact()}
-        className="bg-white/10 border-white/30 text-white hover:bg-white hover:text-primary backdrop-blur-sm"
+      <p className="text-sm text-white/75 mb-4 leading-relaxed">{description}</p>
+      <Button
+        variant="outline"
+        size="sm"
+        onClick={scrollToContact}
+        className="self-start bg-white/10 border-white/30 text-white hover:bg-white hover:text-primary transition-colors"
       >
         Request a Quote
       </Button>
@@ -80,46 +97,29 @@ const ServiceCard = ({ title, icon: Icon, image }: ServiceCardProps) => (
 );
 
 export const Services = () => {
+  const [featured, ...rest] = services;
+
   return (
     <section className="py-16 md:py-24 bg-background">
       <div className="container mx-auto px-4">
+
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-            Our Services
-          </h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Our Services</h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             Professional construction and home improvement services tailored to your needs
           </p>
         </div>
 
-        {/* Structural & New Construction */}
-        <div className="mb-16">
-          <h3 className="text-2xl font-bold text-foreground mb-8 text-center md:text-left">
-            Structural & New Construction
-          </h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {structuralServices.map((service) => (
-              <ServiceCard
-                key={service.title}
-                {...service}
-              />
+        <div className="flex flex-col gap-6">
+          <ServiceCard {...featured} />
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            {rest.map((s) => (
+              <ServiceCard key={s.title} {...s} />
             ))}
           </div>
         </div>
 
-        {/* Remodeling & Home Improvements */}
-        <div>
-          <h3 className="text-2xl font-bold text-foreground mb-8 text-center md:text-left">
-            Remodeling & Home Improvements
-          </h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {remodelingServices.map((service) => (
-              <ServiceCard key={service.title} {...service} />
-            ))}
-          </div>
-        </div>
       </div>
-
     </section>
   );
 };

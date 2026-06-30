@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { ChevronDown, ChevronUp, X } from "lucide-react";
 import galleryReal1 from "@/assets/gallery-real-1.png";
 import galleryReal3 from "@/assets/gallery-real-3.png";
@@ -70,6 +70,17 @@ export const Gallery = () => {
     [lightboxIndex]
   );
 
+  useEffect(() => {
+    if (lightboxIndex === null) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "ArrowRight") navigateLightbox(1);
+      if (e.key === "ArrowLeft")  navigateLightbox(-1);
+      if (e.key === "Escape")     closeLightbox();
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [lightboxIndex, navigateLightbox]);
+
   return (
     <section className="py-16 md:py-24 bg-muted">
       <div className="container mx-auto px-4">
@@ -82,7 +93,7 @@ export const Gallery = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+        <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
           {visibleImages.map((image, index) => (
             <div
               key={index}

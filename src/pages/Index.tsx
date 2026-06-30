@@ -1,8 +1,10 @@
 import { Navbar } from "@/components/Navbar";
 import { Hero } from "@/components/Hero";
+import { FloatingCallButton } from "@/components/FloatingCallButton";
 import { WhyChooseUs } from "@/components/WhyChooseUs";
 import { Services } from "@/components/Services";
 import { About } from "@/components/About";
+import { HowWeWork } from "@/components/HowWeWork";
 import { Gallery } from "@/components/Gallery";
 import { Testimonials } from "@/components/Testimonials";
 import { ServiceAreas } from "@/components/ServiceAreas";
@@ -17,19 +19,21 @@ const Index = () => {
         <Hero />
       </div>
       <WhyChooseUs />
-      <div id="services">
+      <div id="services" className="scroll-mt-20">
         <Services />
       </div>
       <About />
-      <div id="gallery">
+      <HowWeWork />
+      <div id="gallery" className="scroll-mt-20">
         <Gallery />
       </div>
-      <div id="testimonials">
+      <div id="testimonials" className="scroll-mt-20">
         <Testimonials />
       </div>
       <ServiceAreas />
       <ContactForm />
       <Footer />
+      <FloatingCallButton />
     </div>
   );
 };

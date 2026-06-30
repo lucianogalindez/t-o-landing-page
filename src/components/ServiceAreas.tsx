@@ -53,14 +53,15 @@ export const ServiceAreas = () => {
                     {area.state}
                   </h3>
                 </div>
-                <ul className="space-y-2">
-                  {area.cities.map((city) => (
+                <ul className="space-y-2 mb-3">
+                  {area.cities.filter(c => c !== "And surrounding areas").map((city) => (
                     <li key={city} className="text-muted-foreground flex items-start">
                       <span className="text-accent mr-2">•</span>
                       {city}
                     </li>
                   ))}
                 </ul>
+                <p className="text-sm text-muted-foreground/70 italic">And surrounding areas</p>
               </CardContent>
             </Card>
           ))}

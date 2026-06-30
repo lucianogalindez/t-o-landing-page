@@ -42,7 +42,7 @@ export const Footer = () => {
                 Serving RI & MA
               </div>
               <a
-                href="https://www.instagram.com/t.oconstructionllc?igsh=MXkxc3B0d3Z1aXl2ZQ=="
+                href="https://www.instagram.com/toconstructions"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 text-primary-foreground/80 hover:text-primary-foreground transition-colors"
@@ -91,7 +91,7 @@ export const Footer = () => {
           <p>&copy; {currentYear} T&O Construction LLC. All rights reserved.</p>
           <div className="flex items-center gap-4">
             <a
-              href="https://www.instagram.com/t.oconstructionllc?igsh=MXkxc3B0d3Z1aXl2ZQ=="
+              href="https://www.instagram.com/toconstructions"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Instagram"

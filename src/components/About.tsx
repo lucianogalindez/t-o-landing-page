@@ -14,7 +14,7 @@ export const About = () => {
               From window and door installations to complete home renovations, we bring years of professional experience and craftsmanship to every project. We understand that your home is your most valuable investment, and we treat it with the respect and care it deserves.
             </p>
             <p>
-              Our team maintains clean job sites, communicates clearly throughout the process, and delivers results that exceed expectations. Customer satisfaction isn't just our goal—it's our guarantee.
+              Our team maintains clean job sites, communicates clearly throughout the process, and delivers results that exceed expectations. Customer satisfaction is our priority on every job.
             </p>
           </div>
         </div>

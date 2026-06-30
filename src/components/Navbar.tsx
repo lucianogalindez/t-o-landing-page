@@ -14,13 +14,17 @@ const navLinks = [
 export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
-  const [isScrolled, setIsScrolled] = useState(false);
+  const [isOverHero, setIsOverHero] = useState(true);
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10);
+      const heroEl = document.getElementById("home");
+      if (heroEl) {
+        // Switch to solid when the light section is about to appear behind the navbar
+        const navbarHeight = 80;
+        setIsOverHero(heroEl.getBoundingClientRect().bottom > navbarHeight);
+      }
 
-      // Determine active section
       const sections = navLinks.map((link) => link.href.substring(1));
       const scrollPosition = window.scrollY + 100;
 
@@ -28,10 +32,7 @@ export const Navbar = () => {
         const element = document.getElementById(section);
         if (element) {
           const { offsetTop, offsetHeight } = element;
-          if (
-            scrollPosition >= offsetTop &&
-            scrollPosition < offsetTop + offsetHeight
-          ) {
+          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
             setActiveSection(section);
             break;
           }
@@ -39,9 +40,11 @@ export const Navbar = () => {
       }
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  const transparent = isOverHero && !isOpen;
 
   const scrollToSection = (href: string) => {
     const element = document.getElementById(href.substring(1));
@@ -52,26 +55,29 @@ export const Navbar = () => {
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? "bg-background/95 backdrop-blur-sm shadow-md"
-          : "bg-background"
+        transparent
+          ? "bg-transparent"
+          : "bg-background/95 backdrop-blur-sm shadow-md"
       }`}
     >
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16 md:h-20">
+
           {/* Logo */}
-          <button
-            onClick={() => scrollToSection("#home")}
-            className="flex items-center gap-3"
-          >
+          <button onClick={() => scrollToSection("#home")} className="flex items-center gap-3">
             <img
               src={logo}
               alt="T&O Construction LLC"
-              className="h-10 md:h-12 w-auto"
+              className="h-10 md:h-12 w-auto transition-all duration-300"
+              style={{ filter: transparent ? "brightness(0) invert(1)" : "none" }}
             />
             <div className="hidden sm:flex flex-col leading-tight">
-              <span className="font-bold text-foreground text-sm md:text-base">T&O Construction LLC</span>
-              <span className="text-xs md:text-sm text-accent font-medium">Building & Home Remodeling</span>
+              <span className={`font-bold text-sm md:text-base transition-colors duration-300 ${transparent ? "text-white" : "text-foreground"}`}>
+                T&O Construction LLC
+              </span>
+              <span className={`text-xs md:text-sm font-medium transition-colors duration-300 ${transparent ? "text-white/80" : "text-accent"}`}>
+                Building & Home Remodeling
+              </span>
             </div>
           </button>
 
@@ -81,15 +87,23 @@ export const Navbar = () => {
               <button
                 key={link.name}
                 onClick={() => scrollToSection(link.href)}
-                className={`relative text-sm font-medium transition-colors hover:text-accent ${
-                  activeSection === link.href.substring(1)
+                className={`relative text-sm font-medium transition-colors duration-300 ${
+                  transparent
+                    ? activeSection === link.href.substring(1)
+                      ? "text-white"
+                      : "text-white/70 hover:text-white"
+                    : activeSection === link.href.substring(1)
                     ? "text-foreground"
-                    : "text-muted-foreground"
+                    : "text-muted-foreground hover:text-accent"
                 }`}
               >
                 {link.name}
                 {activeSection === link.href.substring(1) && (
-                  <span className="absolute -bottom-1 left-0 right-0 h-0.5 bg-accent animate-fade-in" />
+                  <span
+                    className={`absolute -bottom-1 left-0 right-0 h-0.5 animate-fade-in ${
+                      transparent ? "bg-white" : "bg-accent"
+                    }`}
+                  />
                 )}
               </button>
             ))}
@@ -103,9 +117,9 @@ export const Navbar = () => {
             onClick={() => setIsOpen(!isOpen)}
           >
             {isOpen ? (
-              <X className="h-6 w-6 text-foreground" />
+              <X className={`h-6 w-6 transition-colors duration-300 ${transparent ? "text-white" : "text-foreground"}`} />
             ) : (
-              <Menu className="h-6 w-6 text-foreground" />
+              <Menu className={`h-6 w-6 transition-colors duration-300 ${transparent ? "text-white" : "text-foreground"}`} />
             )}
           </Button>
         </div>
