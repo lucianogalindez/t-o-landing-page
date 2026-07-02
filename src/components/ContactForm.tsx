@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { getAttribution } from "@/utils/attribution";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -47,6 +48,7 @@ export const ContactForm = () => {
     e.preventDefault();
     setIsSubmitting(true);
     try {
+      const attribution = getAttribution();
       const payload = {
         preferredDate: date ? format(date, "PPP") : "Not specified",
         name: formData.name,
@@ -56,6 +58,7 @@ export const ContactForm = () => {
         typeOfWork: formData.typeOfWork,
         budget: formData.budget || "Not specified",
         description: formData.description,
+        ...attribution,
       };
       const response = await fetch(
         "https://n8n-n8n.agjjtd.easypanel.host/webhook/dc3edd26-165c-4578-8863-e78106fb8648",
