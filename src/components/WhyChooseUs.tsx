@@ -9,8 +9,8 @@ const features = [
   },
   {
     icon: Shield,
-    title: "Licensed & Insured",
-    description: "Fully licensed and insured for your peace of mind and protection.",
+    title: "Insured & Registered",
+    description: "Fully insured and registered in Rhode Island: RI Reg. GC‑44652.",
   },
   {
     icon: Clock,

@@ -11,7 +11,7 @@ const steps = [
     number: "02",
     icon: FileText,
     title: "Planning & Quote",
-    description: "We deliver a detailed, transparent estimate with timeline and materials. No hidden costs, no surprises.",
+    description: "A written estimate that describes the work, so you know what is included before we start.",
   },
   {
     number: "03",

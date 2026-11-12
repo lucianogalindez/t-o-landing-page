@@ -104,7 +104,7 @@ export const ContactForm = () => {
                 Let's build something together
               </h2>
               <p className="text-primary-foreground/70 text-base leading-relaxed">
-                Tell us about your project and we'll get back to you within 24 hours.
+                Tell us about your project and we'll get back to you.
               </p>
             </div>
 
@@ -148,7 +148,7 @@ export const ContactForm = () => {
           </div>
 
           <p className="text-primary-foreground/40 text-sm">
-            Licensed & Insured · Free estimates
+            Insured · RI Reg. GC-44652 · Free estimates
           </p>
         </div>
 
