@@ -148,7 +148,7 @@ export const ContactForm = () => {
           </div>
 
           <p className="text-primary-foreground/40 text-sm">
-            Insured · RI Reg. GC-44652 · Free estimates
+            Insured · RI Reg. GC-44652 · MA HIC 215402 · Free estimates
           </p>
         </div>
 

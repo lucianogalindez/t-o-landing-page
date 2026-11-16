@@ -4,6 +4,7 @@ import { Card, CardContent } from "@/components/ui/card";
 const areas = [
   {
     state: "Rhode Island",
+    registration: "RI Reg. GC‑44652",
     cities: [
       "Providence",
       "Warwick",
@@ -16,6 +17,7 @@ const areas = [
   },
   {
     state: "Massachusetts",
+    registration: "MA HIC 215402",
     cities: [
       "Worcester",
       "Fall River",
@@ -49,9 +51,12 @@ export const ServiceAreas = () => {
                   <div className="w-12 h-12 bg-accent rounded-lg flex items-center justify-center">
                     <MapPin className="h-6 w-6 text-accent-foreground" />
                   </div>
-                  <h3 className="text-2xl font-bold text-foreground">
-                    {area.state}
-                  </h3>
+                  <div>
+                    <h3 className="text-2xl font-bold text-foreground leading-tight">
+                      {area.state}
+                    </h3>
+                    <p className="text-xs text-muted-foreground tracking-wide">{area.registration}</p>
+                  </div>
                 </div>
                 <ul className="space-y-2 mb-3">
                   {area.cities.filter(c => c !== "And surrounding areas").map((city) => (

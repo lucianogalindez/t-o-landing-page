@@ -10,7 +10,7 @@ const features = [
   {
     icon: Shield,
     title: "Insured & Registered",
-    description: "Fully insured and registered in Rhode Island: RI Reg. GC‑44652.",
+    description: "Fully insured. RI Reg. GC‑44652 · MA HIC 215402.",
   },
   {
     icon: Clock,
