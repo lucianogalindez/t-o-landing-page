@@ -13,7 +13,7 @@ const services = [
     description: "New window installation and full replacement, measured, installed and trimmed for a clean finish.",
     icon: Square,
     image: windowsImg,
-    workType: "Window Installation & Replacement",
+    workType: "Windows",
   },
   {
     title: "Doors",
@@ -21,7 +21,7 @@ const services = [
     description: "Entry, French and sliding doors, interior and exterior, installed and finished to fit your home.",
     icon: DoorOpen,
     image: doorsImg,
-    workType: "Door Installation",
+    workType: "Doors",
   },
   {
     title: "Remodeling",
@@ -29,7 +29,7 @@ const services = [
     description: "Kitchens, bathrooms, floors and interior finish work, from a single room to the whole house.",
     icon: UtensilsCrossed,
     image: kitchenImg,
-    workType: "Full Home Remodeling",
+    workType: "Remodeling",
   },
 ];
 

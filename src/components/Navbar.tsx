@@ -15,9 +15,11 @@ export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
   const [isOverHero, setIsOverHero] = useState(true);
+  const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
+      setIsScrolled(window.scrollY > 8);
       const heroEl = document.getElementById("home");
       if (heroEl) {
         // Switch to solid when the light section is about to appear behind the navbar
@@ -56,7 +58,9 @@ export const Navbar = () => {
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         transparent
-          ? "bg-transparent"
+          ? isScrolled
+            ? "bg-primary/95 backdrop-blur-sm shadow-md" // still over the hero but scrolled: keep white text, hide content behind
+            : "bg-transparent"
           : "bg-background/95 backdrop-blur-sm shadow-md"
       }`}
     >
