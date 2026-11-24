@@ -1,12 +1,9 @@
 import { Phone, Mail, MapPin, Instagram, Facebook } from "lucide-react";
+import { useSectionNav } from "@/hooks/use-section-nav";
 
 export const Footer = () => {
   const currentYear = new Date().getFullYear();
-
-  const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    element?.scrollIntoView({ behavior: "smooth" });
-  };
+  const scrollToSection = useSectionNav();
 
   return (
     <footer className="bg-primary text-primary-foreground">

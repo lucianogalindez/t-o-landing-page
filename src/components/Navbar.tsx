@@ -2,10 +2,13 @@ import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import logo from "@/assets/logo.png";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useSectionNav } from "@/hooks/use-section-nav";
 
 const navLinks = [
   { name: "Home", href: "#home" },
   { name: "Services", href: "#services" },
+  { name: "203(k) Loans", href: "/203k" }, // separate page, not a section
   { name: "Gallery", href: "#gallery" },
   { name: "Testimonials", href: "#testimonials" },
   { name: "Contact", href: "#contact" },
@@ -27,7 +30,7 @@ export const Navbar = () => {
         setIsOverHero(heroEl.getBoundingClientRect().bottom > navbarHeight);
       }
 
-      const sections = navLinks.map((link) => link.href.substring(1));
+      const sections = navLinks.filter((l) => l.href.startsWith("#")).map((link) => link.href.substring(1));
       const scrollPosition = window.scrollY + 100;
 
       for (const section of sections) {
@@ -47,10 +50,16 @@ export const Navbar = () => {
   }, []);
 
   const transparent = isOverHero && !isOpen;
+  const { pathname } = useLocation();
+  const navigate = useNavigate();
+  const goToSection = useSectionNav();
+  // Home: highlight the section in view. Other pages: highlight the page's own link (e.g. "/203k").
+  const current = pathname === "/" ? activeSection : pathname;
+  const linkKey = (href: string) => (href.startsWith("#") ? href.substring(1) : href);
 
   const scrollToSection = (href: string) => {
-    const element = document.getElementById(href.substring(1));
-    element?.scrollIntoView({ behavior: "smooth" });
+    if (href.startsWith("/")) navigate(href);
+    else goToSection(href.substring(1));
     setIsOpen(false);
   };
 
@@ -86,23 +95,23 @@ export const Navbar = () => {
           </button>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden md:flex items-center gap-5 lg:gap-8">
             {navLinks.map((link) => (
               <button
                 key={link.name}
                 onClick={() => scrollToSection(link.href)}
                 className={`relative text-sm font-medium transition-colors duration-300 ${
                   transparent
-                    ? activeSection === link.href.substring(1)
+                    ? current === linkKey(link.href)
                       ? "text-white"
                       : "text-white/70 hover:text-white"
-                    : activeSection === link.href.substring(1)
+                    : current === linkKey(link.href)
                     ? "text-foreground"
                     : "text-muted-foreground hover:text-accent"
                 }`}
               >
                 {link.name}
-                {activeSection === link.href.substring(1) && (
+                {current === linkKey(link.href) && (
                   <span
                     className={`absolute -bottom-1 left-0 right-0 h-0.5 animate-fade-in ${
                       transparent ? "bg-white" : "bg-accent"
@@ -137,7 +146,7 @@ export const Navbar = () => {
                   key={link.name}
                   onClick={() => scrollToSection(link.href)}
                   className={`text-left px-4 py-2 rounded-md transition-colors ${
-                    activeSection === link.href.substring(1)
+                    current === linkKey(link.href)
                       ? "bg-accent/10 text-foreground font-medium"
                       : "text-muted-foreground hover:bg-muted"
                   }`}

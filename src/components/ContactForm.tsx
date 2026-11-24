@@ -8,8 +8,15 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Phone, Mail, MapPin, Camera, X, Loader2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
-// Values must match the workType that Services.tsx sends with "preselect-work-type"
-const workTypes = ["Windows", "Doors", "Remodeling", "Other"];
+// Values must match the workType that Services.tsx and the /203k page send with "preselect-work-type"
+const workTypes = [
+  "Windows",
+  "Doors",
+  "Remodeling",
+  "203(k) Renovation Loan",
+  "203(k) Feasibility Assessment",
+  "Other",
+];
 
 const findUsOptions = ["Instagram", "Facebook", "Google", "LinkedIn", "TikTok", "YouTube", "Referral", "Other"];
 

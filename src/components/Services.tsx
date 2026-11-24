@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
-import { Square, DoorOpen, UtensilsCrossed } from "lucide-react";
+import { Square, DoorOpen, UtensilsCrossed, ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 
 import windowsImg from "@/assets/service-windows.jpg";
 import doorsImg   from "@/assets/service-doors.jpg";
@@ -76,6 +77,21 @@ export const Services = () => (
           </div>
         ))}
       </div>
+
+      {/* Entry point to the /203k page */}
+      <Link
+        to="/203k"
+        className="group mt-6 flex flex-col sm:flex-row sm:items-center justify-between gap-3 rounded-xl border border-border bg-muted/50 px-5 py-4 md:px-6 hover:border-accent transition-colors"
+      >
+        <p className="text-foreground">
+          <span className="font-semibold">Buying a home that needs work?</span>{" "}
+          <span className="text-muted-foreground">We work on FHA 203(k) renovation loans.</span>
+        </p>
+        <span className="inline-flex items-center text-sm font-semibold text-primary shrink-0">
+          Learn about 203(k)
+          <ArrowRight className="ml-1.5 h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+        </span>
+      </Link>
     </div>
   </section>
 );
